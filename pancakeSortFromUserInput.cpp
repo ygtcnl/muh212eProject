@@ -2,50 +2,67 @@
 
 using namespace std;
 
-//int findMax(int arr[],int endpoint) fonksiyonu verilen arrayde 0.indexinden endpoint-1 indexine kadar olan maksimum integer değerinin bulunduğu indexi dönüyor
-int findIndexOfMax(int arr[],int endpoint)  
+int temp; //we created global integer, we will use it while flipping the arrays
+
+//that function unrelated to the algorithm, if the user wants to see changes on screen she/he can use that function
+void printArray(int arr[],int size)
 {
-    int index=0; //en başta max olan index 0 olarak atanıyor
-    for(int i=0;i<endpoint;i++) //arrayin elemanları üstünde geziniyoruz
+    for(int i=0;i<size;i++)
     {
-        if(arr[index]<arr[i]) //eğer i indexindeki değer daha büyükse indexi i yapıyoruz
-            index=i;
+        int m=arr[i];
+        cout<<(int)m<<" ";
     }
-    return index;
+    cout<<endl;
 }
 
-//void flip(int arr[],int endpoint) fonksiyonu verilen arrayde 0 indexiyle endpoint indexine kadar olan subarrayi ters çeviriyor
+//int findMax(int arr[],int endpoint) returns the index of maximum value between indexes 0 and endpoint
+int findIndexOfMax(int arr[],int endpoint)  
+{
+    int index=0; //we set index as 0
+    for(int i=0;i<endpoint;i++) //we visit all integers between 0 and endpoint
+    {
+        if(arr[index]<arr[i]) //if the value of i.th index is higher we change index by i
+            index=i;
+    }
+    return index; // the iteration is over now we return the index of maximum value in given range
+}
+
+//void flip(int arr[],int endpoint) flips the subarray between arr[0] and arr[endpoint]
 void flip(int arr[],int endpoint)
 {
-    int curr=0; //curr şuan bulunduğumuz indexi belirtiyor
-    while(curr<endpoint) //two pointer şeklinde ilerlediğimizden pointerların karşılaşıp birbirlerini geçmemesini kontrol ediyoruz
+    int curr=0; //curr represents our starting index
+    while(curr<endpoint) //we are using two pointer technique and on here loop needs to stop when these two pointers cross each other
     {
-        int temp=arr[curr]; //ek bir integer oluşturuyoruz arr[curr] ile arr[endpoint] in yerlerini değiştirirken işimize yarıyor
-        arr[curr]=arr[endpoint];
+        temp=arr[curr]; //temp helps to store arr[curr] value temporary on here temp is declared as global so the space complexity is O(1)
+        arr[curr]=arr[endpoint];//on that two line we change values
         arr[endpoint]=temp;
         curr++;
         endpoint--;
     }
 }
 
-//bildiğimiz pancake sort
+//main function for sorting the algorithm
 void pancakeSort(int arr[],int size)
 {
     for(int curr=size;curr>1;curr--)
     {
-        int maxIndex=findIndexOfMax(arr,curr); //"curr" e kadar olan maksimum değerin indexini buluyoruz
-        flip(arr,maxIndex); //çeviriyoruz
-        flip(arr,curr-1); //bir daha çeviriyoruz
+        int maxIndex=findIndexOfMax(arr,curr); //we find the index of maximum value between indexes 0 and "curr"
+        flip(arr,maxIndex); //we flip subarray between 0 and "maxIndex"
+        printArray(arr,size);
+        flip(arr,curr-1); //we flip again but now we flip subarray between 0 and "curr"-1
+        printArray(arr,size);
     }
 }
 
+
 int main()
 {
-    int arr[]={1,5,4,3,2,6};
+    int arr[]={-45,1,46,-145,-6987,418};
     int size=sizeof(arr)/sizeof(arr[0]);
+    printArray(arr,size);
     pancakeSort(arr,size);
     for(int i=0;i<size;i++)
     {
-        cout<<arr[i]<<endl;
+        cout<<arr[i]<<" ";
     }
 }

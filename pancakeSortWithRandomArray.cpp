@@ -64,7 +64,7 @@ void generateRandomArray(int arr[],int size) {
 
 int main()
 {
-    int size=50000;
+    int size=100000;
     int arr[size];
     generateRandomArray(arr,size);
     int arr2[size];
@@ -73,10 +73,10 @@ int main()
     pancakeSort(arr,size);
     auto stop = high_resolution_clock::now(); 
     auto duration = duration_cast<microseconds>(stop - start);
-    cout<<"our execution time" << duration.count() << endl;   
+    cout<<"our function(O(n^2)) execution time " << duration.count()<<" microseconds" << endl;   
     auto start1 = high_resolution_clock::now(); 
     sort(arr2,size+arr2);
     auto stop1 = high_resolution_clock::now(); 
     auto duration1 = duration_cast<microseconds>(stop1 - start1);
-    cout<<"built-in execution time" << duration1.count() << endl;  
+    cout<<"built-in funciton(O(nlogn)) execution time " << duration1.count()<<" microseconds" << endl;  
 }

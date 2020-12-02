@@ -4,6 +4,10 @@
 using namespace std;
 using namespace std::chrono; 
 
+//IMPORTANT//
+//I write that code myself but i have inspired from geeksforgeeks.com
+//for more details https://www.geeksforgeeks.org/pancake-sorting/
+
 int temp; //we created global integer, we will use it while flipping the arrays
 
 //int findMax(int arr[],int endpoint) returns the index of maximum value between indexes 0 and endpoint

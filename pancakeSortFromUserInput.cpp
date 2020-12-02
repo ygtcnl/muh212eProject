@@ -2,7 +2,11 @@
 
 using namespace std;
 
-int temp; //we created global integer, we will use it while flipping the arrays
+int temp; //we created global integer,a we will use it while flipping the arrays
+
+//IMPORTANT//
+//I write that code myself but i have inspired from geeksforgeeks.com
+//for more details https://www.geeksforgeeks.org/pancake-sorting/
 
 //that function unrelated to the algorithm, if the user wants to see changes on screen she/he can use that function
 void printArray(int arr[],int size)
